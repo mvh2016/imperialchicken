@@ -43,6 +43,7 @@ client.on('message', message => {
                 .setFooter('Bot created by CanadianJudgement | Judgement#3155 for help')
             var eventChannel = client.channels.get('668503492788224030')
             eventChannel.send(rsStart)
+            eventChannel.send('<@&668250263651352585>')            
             message.channel.send(':white_check_mark: Event start message successfully posted! '+message.author)
         }
 
@@ -86,6 +87,7 @@ client.on('message', message => {
                 .setFooter('Bot created by CanadianJudgement | Judgement#3155 for help')
             var eventChannel = client.channels.get('668503492788224030')
             eventChannel.send(ctStart)
+            eventChannel.send('<@&668250263651352585>')
             message.channel.send(':white_check_mark: Event start message successfully posted! '+message.author)
         }
 
@@ -107,6 +109,7 @@ client.on('message', message => {
                 .setFooter('Bot created by CanadianJudgement | Judgement#3155 for help')
             var eventChannel = client.channels.get('668503492788224030')
             eventChannel.send(btStart)
+            eventChannel.send('<@&668250263651352585>')
             message.channel.send(':white_check_mark: Event start message successfully posted! '+message.author)
         }
 
@@ -128,6 +131,7 @@ client.on('message', message => {
                 .setFooter('Bot created by CanadianJudgement | Judgement#3155 for help')
             var eventChannel = client.channels.get('668503492788224030')
             eventChannel.send(scrimmageStart)
+            eventChannel.send('<@&668250263651352585>')
             message.channel.send(':white_check_mark: Event start message successfully posted! '+message.author)
         }
 
@@ -145,6 +149,7 @@ client.on('message', message => {
                 .setFooter('Bot created by CanadianJudgement | Judgement#3155 for help')
             var eventChannel = client.channels.get('668503492788224030')
             eventChannel.send(rsEnd)
+            eventChannel.send('<@&668250263651352585>')
             message.channel.send(':white_check_mark: Event end message successfully posted! '+message.author)
         }
 
@@ -162,6 +167,7 @@ client.on('message', message => {
                 .setFooter('Bot created by CanadianJudgement | Judgement#3155 for help')
             var eventChannel = client.channels.get('668503492788224030')
             eventChannel.send(dsEnd)
+            eventChannel.send('<@&668250263651352585>')
             message.channel.send(':white_check_mark: Event end message successfully posted! '+message.author)
         }
 
@@ -179,6 +185,7 @@ client.on('message', message => {
                 .setFooter('Bot created by CanadianJudgement | Judgement#3155 for help')
             var eventChannel = client.channels.get('668503492788224030')
             eventChannel.send(ctEnd)
+            eventChannel.send('<@&668250263651352585>')
             message.channel.send(':white_check_mark: Event end message successfully posted! '+message.author)
         }
 
@@ -196,6 +203,7 @@ client.on('message', message => {
                 .setFooter('Bot created by CanadianJudgement | Judgement#3155 for help')
             var eventChannel = client.channels.get('668503492788224030')
             eventChannel.send(btEnd)
+            eventChannel.send('<@&668250263651352585>')
             message.channel.send(':white_check_mark: Event end message successfully posted! '+message.author)
         }
 
@@ -213,6 +221,7 @@ client.on('message', message => {
                 .setFooter('Bot created by CanadianJudgement | Judgement#3155 for help')
             var eventChannel = client.channels.get('668503492788224030')
             eventChannel.send(scrimmageEnd)
+            eventChannel.send('<@&668250263651352585>')
             message.channel.send(':white_check_mark: Event end message successfully posted! '+message.author)
         }
 
