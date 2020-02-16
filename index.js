@@ -2,6 +2,9 @@ const Discord = require('discord.js');
 const prefix = '/';
 const token = process.env.token
 const client = new Discord.Client();
+const rbx = require('noblox.js')
+const snekfetch = require('snekfetch');
+const moment = require('moment');
 
 client.on('ready', () => {
     console.log('Bot is ready.')
@@ -9,6 +12,7 @@ client.on('ready', () => {
 })
 
 client.on('message', message => {
+    
     
     if (message.content.startsWith(`${prefix}commands`)) {
         const ThisEmbed = new Discord.RichEmbed()
@@ -43,7 +47,7 @@ client.on('message', message => {
                 .setFooter('Bot created by CanadianJudgement | Judgement#3155 for help')
             var eventChannel = client.channels.get('668503492788224030')
             eventChannel.send(rsStart)
-            eventChannel.send('<@&668250263651352585>')            
+            eventChannel.send('<@&668250263651352585>')
             message.channel.send(':white_check_mark: Event start message successfully posted! '+message.author)
         }
 
@@ -66,6 +70,7 @@ client.on('message', message => {
                 .setFooter('Bot created by CanadianJudgement | Judgement#3155 for help')
             var eventChannel = client.channels.get('668503492788224030')
             eventChannel.send(dsStart)
+            eventChannel.send('<@&668250263651352585>')
             message.channel.send(':white_check_mark: Event start message successfully posted! '+message.author)
         }
 
@@ -203,7 +208,6 @@ client.on('message', message => {
                 .setFooter('Bot created by CanadianJudgement | Judgement#3155 for help')
             var eventChannel = client.channels.get('668503492788224030')
             eventChannel.send(btEnd)
-            eventChannel.send('<@&668250263651352585>')
             message.channel.send(':white_check_mark: Event end message successfully posted! '+message.author)
         }
 
@@ -221,7 +225,6 @@ client.on('message', message => {
                 .setFooter('Bot created by CanadianJudgement | Judgement#3155 for help')
             var eventChannel = client.channels.get('668503492788224030')
             eventChannel.send(scrimmageEnd)
-            eventChannel.send('<@&668250263651352585>')
             message.channel.send(':white_check_mark: Event end message successfully posted! '+message.author)
         }
 
@@ -230,7 +233,98 @@ client.on('message', message => {
         }
     }
 
-
+    if (message.channel.id === '668251652821876749') {
+        var splitArgs = message.content.split('\n')
+        if (splitArgs.length === 2) {
+            var getLink = splitArgs[1].split('/')
+            console.log(getLink)
+            if (getLink.length === 6) {
+                var profileID = getLink[4]
+                console.log(profileID)
+                var user1 = splitArgs[0].split(': ')
+                if (user1.length === 2) {
+                    console.log(splitArgs)
+                    var username1 = splitArgs[0].split(': ')
+                    var username = username1[1]
+                    console.log(username)
+                    rbx.getUsernameFromId(profileID).then(user => {
+                        if (user.toString().toLowerCase() === username.toString().toLowerCase()) {
+                            rbx.getRankInGroup(5524823, profileID).then(rank => {
+                                if (rank != 0) {
+                                    rbx.getRankInGroup(872876, profileID).then(async foundRank => {
+                                        if (foundRank != 0) {
+                                            rbx.getPlayerInfo(profileID).then(info => {
+                                                var dateOfJoin = info.joinDate
+                                                var dateOfJoinDate = dateOfJoin.getTime();
+                                                console.log(dateOfJoinDate)
+                                                moment.utc(dateOfJoin).format();
+                                                var sixtyAgo = moment().subtract(60, 'days').toDate().getTime();
+                                                console.log(sixtyAgo)
+                                                if (dateOfJoinDate < sixtyAgo) {
+                                                    message.react('✅')
+                                                    const accepted = new Discord.RichEmbed()
+                                                        .setTitle('Verification Accepted - Imperial Chicken')
+                                                        .setDescription('You have been granted access to the IC Discord server. Welcome. \n**Ave The Chicken!**')
+                                                    message.author.send(accepted)
+                                                    if (message.member.roles.has('668259428260380673')) {
+                                                        ;
+                                                    } else {
+                                                        message.author.addRole('668259428260380673')
+                                                    }
+                                                } else {
+                                                    message.react('❌')
+                                                    const denied7 = new Discord.RichEmbed()
+                                                    .setTitle('Verification Request Denied')
+                                                    .setDescription(`Your account is less than sixty days old! \nYou may reattempt verification after that time has passed. \nThis is to prevent alternate accounts.`)
+                                                    message.author.send(denied7)   
+                                                }
+                                            })
+                                        } else {
+                                            message.react('❌')
+                                            const denied6 = new Discord.RichEmbed()
+                                            .setTitle('Verification Request Denied')
+                                            .setDescription(`You are not in the IRF group! You must join it to enter!`)
+                                            message.author.send(denied6)   
+                                        }
+                                    })
+                                } else {
+                                    message.react('❌')
+                                    const denied5 = new Discord.RichEmbed()
+                                    .setTitle('Verification Request Denied')
+                                    .setDescription(`You are not in the Imperial Chicken group! Join now! \nhttps://www.roblox.com/groups/5524823/Imperial-Chicken#!/about`)
+                                    message.author.send(denied5)   
+                                }
+                            })
+                        } else {
+                            message.react('❌')
+                            const denied4 = new Discord.RichEmbed()
+                            .setTitle('Verification Request Denied')
+                            .setDescription(`The username you declared, ${username}, is not the one on your profile link provided (${user}). Make sure your profile link is correct.`)
+                            message.author.send(denied4)   
+                        }
+                    })
+                } else {
+                    message.react('❌')
+                    const denied3 = new Discord.RichEmbed()
+                    .setTitle('Verification Request Denied')
+                    .setDescription('You have failed to use proper format. In particular, your username is not correct. Make sure you have a space in between Username: and your username.')
+                    message.author.send(denied3)  
+                }
+            } else {
+                message.react('❌')
+                const denied2 = new Discord.RichEmbed()
+                .setTitle('Verification Request Denied')
+                .setDescription('You have failed to use proper format. In particular, your profile link is not correct. Make sure you copy the entire URL as your link.')
+                message.author.send(denied2)
+            }
+        } else {
+            message.react('❌')
+            const denied = new Discord.RichEmbed()
+                .setTitle('Verification Request Denied')
+                .setDescription('You have failed to use proper format. Remember, the format is: \nUsername: <your username>\nProfile Link: <your profile link>')
+            message.author.send(denied)
+        }
+    }
 })
 
 client.login(token)
