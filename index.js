@@ -269,7 +269,7 @@ client.on('message', message => {
                                                     if (message.member.roles.has('668259428260380673')) {
                                                         ;
                                                     } else {
-                                                        message.author.addRole('668259428260380673')
+                                                        message.member.addRole('668259428260380673')
                                                     }
                                                 } else {
                                                     message.react('❌')
